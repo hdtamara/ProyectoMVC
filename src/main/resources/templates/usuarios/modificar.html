@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Datos del usuario</title>
+</head>
+<body>
+    <h1>Datos de usuario</h1>
+    <form th:action="@{/guardar}" method="post" th:object="${usuario}">
+        <label for="nombre">Nombre </label>
+        <input type="text" name="nombre" th:field="*{nombre}"/>
+        <br>
+        <label for="apellido">Apellido </label>
+        <input type="text" name="apellido" th:field="*{apellido}"/>
+        <br>
+        <label for="rol">Rol </label>
+        <select th:field="*{rol.idRol}" name="rol">
+            <option  value="0" selected>Seleccione rol</option>
+            <option th:each="rol : ${roles}"
+                    th:value="${rol.idRol}"
+                    th:text="${rol.descripcion}">
+            </option>
+        </select>
+        <br>
+        <label for="tipoDocumento">Tipo de documento </label>
+        <select th:field="*{tipoDocumento.idTipoDocumento}" name="tipoDocumento">
+            <option  value="0" selected>Seleccione tipo de documento</option>
+            <option th:each="tipoDocumento : ${tiposDocumentos}"
+                    th:value="${tipoDocumento.idTipoDocumento}"
+                    th:text="${tipoDocumento.descripcion}">
+            </option>
+        </select>
+        <br>
+        <label for="numeroDocumento">Número de documento </label>
+        <input type="text" name="numeroDocumento" th:field="*{cedula}"/>
+        <br>
+        <label for="perfil">Perfil </label>
+        <select th:field="*{perfil}" name="perfil">
+            <option  value="0" selected>Seleccione el tipo de perfil</option>
+            <option th:each="perfil : ${T(co.gov.mintic.tesoreria.thymeleaf.entities.Perfil).values()}"
+                    th:value="${perfil}"
+                    th:text="${perfil}">
+            </option>
+        </select>
+        <br>
+        <label for="correo">Correo </label>
+        <input type="email" name="correo" th:field="*{correo}"/>
+        <br>
+        <label for="pass">Password </label>
+        <input type="password" name="pass" th:field="*{clave}"/>
+        <br>
+        <input type="submit" name="guardar" value="Guardar">
+    </form>
+
+</body>
+</html>
